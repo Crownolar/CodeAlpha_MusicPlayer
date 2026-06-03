@@ -1,0 +1,59 @@
+@media (max-width: 768px) {
+  .mainDiv {
+    max-width: 100%;
+    padding: 12px;
+  }
+
+  .card1,
+  .card2,
+  .card3,
+  .card4 {
+    flex: 0 0 85%;
+  }
+
+  .headerText h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card1,
+  .card2,
+  .card3,
+  .card4 {
+    flex: 0 0 90%;
+  }
+
+  .imgWrap {
+    flex: 0 0 85px;
+  }
+
+  .recentTitle {
+    font-size: 0.65rem;
+  }
+
+  .title h1 {
+    font-size: 1rem;
+  }
+
+  .moreSection {
+    padding-inline: 5px;
+  }
+
+  .navItem p {
+    font-size: 0.65rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mainDiv {
+    max-width: 430px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 20px 0;
+  }
+
+  body {
+    background-color: #111;
+  }
+}

@@ -1,0 +1,396 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255, 255, 255);
+}
+
+.mainDiv {
+  /* width: 55vw; */
+  /* width: min(100%, 430px); */
+  width: 100%;
+  max-width: 430px;
+  height: 100vh;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  padding: 10px;
+}
+
+header div {
+  /* height: 10vh; */
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  /* gap: 15px; */
+  /* padding: 10px; */
+}
+
+.headerText {
+  display: flex;
+  flex-direction: column;
+}
+
+.headerText p {
+  color: #8e8e93;
+  font-size: 0.8rem;
+}
+
+.headerText h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.user-icon {
+  font-size: 18px;
+  color: #e11b3f;
+}
+
+.underline {
+  border: none;
+  height: 0.3px;
+  background-color: #2e2d2d;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  /* height: 70vh;
+  flex-direction: column;
+  display: flex;
+  gap: 20px; */
+  /* background-color: gold; */
+}
+
+.topPick {
+  width: 100%;
+  /* height: 53vh; */
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  /* background-color: lime; */
+}
+
+.topPickHeadline {
+  /* height: 8vh; */
+  padding: 5px;
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  /* margin-bottom: 8px; */
+  /* height: 10vh;
+  /* background-color: orange; */
+}
+
+.topPickHeadline p {
+  font-size: 10px;
+  color: gray;
+}
+
+/* .carousel {
+    height: 70vh;
+} */
+
+.imageCarousel {
+  width: 100%;
+  /* height: 60vh; */
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 15px;
+  scrollbar-width: none;
+  /* background-color: green; */
+  -webkit-overflow-scrolling: touch;
+  border-radius: 10px;
+  scroll-snap-type: x mandatory;
+}
+
+.imageCarousel::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  border-radius: 10px;
+  height: 100%;
+  flex: 0 0 70%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 120px;
+  background-color: #1c1c1e;
+  scroll-snap-align: start;
+}
+
+.card {
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* .card1,
+.card2,
+.card3,
+.card4 {
+  border-radius: 10px;
+  height: 100%;
+  flex: 0 0 70%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 120px;
+  background-color: #1c1c1e;
+  scroll-snap-align: start;
+}
+
+.card1,
+.card2,
+.card3,
+.card4 {
+  transition: transform 0.3s ease;
+}
+
+.card1:hover,
+.card2:hover,
+.card3:hover,
+.card4:hover {
+  transform: translateY(-4px);
+} */
+
+/* .card1, .card2, .card3, .card4 {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+} */
+
+.cardImg {
+  width: 100%;
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.cardDetails {
+  /* background-color: #e11b3f; */
+  background: #1c1c1e;
+  /* background: transparent; */
+  height: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.cardTitle {
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.cardSubtext {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardArtist {
+  font-size: 13px;
+  font-weight: 400;
+  color: #b3b3b3;
+}
+
+.cardYear {
+  font-size: 13px;
+  color: rgb(163, 110, 110);
+}
+
+.recentlyPlayed {
+  background-color: #1c1c1e;
+  width: 100%;
+  /* height: 30%; */
+   min-height: 180px;
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title h1 {
+  font-size: 15px;
+}
+
+.title p {
+  color: #e11b3f;
+}
+
+.recentlyPlayedImgcon {
+  width: 100%;
+  height: 75%;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+}
+
+.imgWrap {
+  /* min-width: 100px; */
+  flex: 0 0 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-radius: 20px;
+  scroll-snap-align: start;
+}
+
+.recentImg {
+  width: 100%;
+  height: 70%;
+}
+
+.recentImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.recentTitle {
+  font-size: 10px;
+  font-weight: 400;
+  color: #b3b3b3;
+}
+
+.nowPlaying {
+  background: #1c1c1e;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nowPlaying img {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.playingInfo {
+  flex: 1;
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+.playingInfo p {
+  color: #8e8e93;
+  font-size: 0.85rem;
+}
+
+.controls {
+  display: flex;
+  gap: 15px;
+}
+
+.backward, .forward, .play {
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+
+.backward:hover, .forward:hover, .play:hover {
+  transform: scale(1.2);
+}
+
+.moreSection {
+  background-color: #1c1c1e;
+  width: 100%;
+  /* height: 20%; */
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 8px;
+  padding-block: 8px;
+  border-radius: 8px;
+  /* flex-direction: column; */
+}
+
+nav,
+.navText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+nav {
+  color: #e11b3f;
+}
+
+.navText {
+  color: #b3b3b3;
+}
+
+.navItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: #8e8e93;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.navItem:hover {
+  color: #e11b3f;
+}
+
+.navItem i {
+  font-size: 1.2rem;
+}
+
+.navItem p {
+  font-size: 0.75rem;
+}
+
+.active {
+  color: #e11b3f;
+}
+
+

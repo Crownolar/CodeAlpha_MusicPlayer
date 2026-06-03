@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/mobileStyle.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music</title>
+  </head>
+  <body>
+    <div class="mainDiv">
+      <header>
+        <div>
+          <div class="headerText">
+            <p>Good Evening</p>
+            <h2>Listen Now</h2>
+          </div>
+          <i class="fa-solid fa-user user-icon"></i>
+        </div>
+        <hr class="underline" />
+      </header>
+
+      <main>
+        <section class="topPick">
+          <div class="topPickHeadline">
+            <h4>Top Picks</h4>
+            <p>More from ({singer})</p>
+          </div>
+          <div class="imageCarousel"></div>
+        </section>
+
+        <section class="recentlyPlayed">
+          <div class="title">
+            <h1>Recently Played</h1>
+            <p>See All</p>
+          </div>
+
+          <div class="recentlyPlayedImgcon">
+          </div>
+        </section>
+
+        <section class="nowPlaying">
+          <img src="" alt="song cover" />
+
+          <div class="playingInfo">
+            <h4>No song selected</h4>
+            <p>Select a song</p>
+          </div>
+
+          <div class="controls">
+            <i class="fa-solid fa-backward backward"></i>
+            <i id="icn" class="fa-solid fa-play play"></i>
+            <!-- <i class="fa-solid fa-pause"></i> -->
+            <i class="fa-solid fa-forward forward"></i>
+          </div>
+        </section>
+
+        <section class="moreSection">
+          <div class="navItem active">
+            <i class="fa-solid fa-music"></i>
+            <p>Listen</p>
+          </div>
+
+          <div class="navItem">
+            <i class="fa-solid fa-book"></i>
+            <p>Library</p>
+          </div>
+
+          <div class="navItem">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <p>Search</p>
+          </div>
+
+          <div class="navItem">
+            <i class="fa-solid fa-user"></i>
+            <p>Profile</p>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="./js/script.js"></script>
+  </body>
+</html>
