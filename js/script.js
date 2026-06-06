@@ -10,6 +10,8 @@ const nowPlayingImg = document.querySelector(".nowPlaying img");
 const nowPlayingTitle = document.querySelector(".playingInfo h4");
 const nowPlayingArtist = document.querySelector(".playingInfo p");
 const recentlyPlayedContainer = document.querySelector(".recentlyPlayedImgcon");
+const forward = document.querySelector('.forward')
+const backward = document.querySelector('.backward')
 
 cardData = [
   {
@@ -66,12 +68,20 @@ card.innerHTML = cardData
   )
   .join("");
 
-const selectedSong = JSON.parse(localStorage.getItem("selectedSong"));
+localStorage.setItem("playlist", JSON.stringify(cardData));
 
-if (selectedSong) {
-  nowPlayingImg.src = `./assets/images/${selectedSong.image}`;
-  nowPlayingTitle.textContent = selectedSong.title;
-  nowPlayingArtist.textContent = selectedSong.artist;
+const playlist = JSON.parse(localStorage.getItem("playlist")) || [];
+
+const curInd = Number(localStorage.getItem("curInd")) || 0;
+
+const curSong = playlist[curInd];
+
+// const selectedSong = JSON.parse(localStorage.getItem("selectedSong"));
+
+if (curSong) {
+  nowPlayingImg.src = `./assets/images/${curSong.image}`;
+  nowPlayingTitle.textContent = curSong.title;
+  nowPlayingArtist.textContent = curSong.artist;
 }
 
 card.addEventListener("click", (e) => {
@@ -85,6 +95,7 @@ card.addEventListener("click", (e) => {
     if (cards[i] === clickedCard) {
       const selectedSong = cardData[i];
 
+      localStorage.setItem("curInd", i);
       localStorage.setItem("selectedSong", JSON.stringify(selectedSong));
 
       let recentlyPlayed =
@@ -133,20 +144,88 @@ playingInfo.addEventListener("click", () => {
   window.location.href = "dashboard/index.html";
 });
 
-let isplaying = false;
+let isPlaying = false;
+
+const audio = new Audio();
+
+const loadHomePlay = () => {
+  const playlist = JSON.parse(localStorage.getItem('playlist')) || [];
+
+  const curInd = Number(localStorage.getItem('curInd')) || 0;
+
+  const play = playlist[curInd];
+
+  if (!play) return;
+
+  nowPlayingArtist.textContent = play.artist;
+  nowPlayingImg.src = `./assets/images/${play.image}`;
+  nowPlayingTitle.textContent = play.title;
+
+  audio.src = `./assets/audio/${play.audio}`;
+}
+
+loadHomePlay()
 
 play.addEventListener("click", () => {
-  isplaying = !isplaying;
+  // isplaying = !isplaying;
 
-  if (isplaying) {
+  if (!isPlaying) {
+    audio.play()
+
     icon.classList.remove("fa-play");
     icon.classList.add("fa-pause");
+
+    isPlaying = true;
   } else {
+    audio.pause();
+
     icon.classList.add("fa-play");
     icon.classList.remove("fa-pause");
+
+    isPlaying = false
   }
 });
 
+forward.addEventListener('click', () => {
+  let curInd = Number(localStorage.getItem('curInd')) || 0;
+
+  if (curInd === playlist.length - 1) {
+    curInd = 0;
+  } else {
+    curInd++
+  }
+
+  localStorage.setItem('curInd', curInd)
+
+  loadHomePlay()
+
+  audio.play()
+
+  isPlaying = true
+
+  icon.classList.remove('fa-play')
+  icon.classList.add('fa-pause')
+})
+
+backward.addEventListener('click', () => {
+  let curInd = Number(localStorage.getItem('curInd')) || 0
+
+  if (curInd === 0) {
+    curInd = playlist.length - 1
+  } else 
+    curInd--
+
+    localStorage.setItem('curInd', curInd)
+
+    loadHomePlay()
+
+    audio.play()
+
+    isPlaying = true
+
+    icon.classList.remove('fa-play')
+    icon.classList.add('fa-pause')
+})
 
 const renderRecentlyPlayed = () => {
   const recentlyPlayed =
@@ -186,10 +265,41 @@ recentlyPlayedContainer.addEventListener("click", (e) => {
 
   const index = [...document.querySelectorAll(".imgWrap")].indexOf(clicked);
 
+  JSON.parse(localStorage.getItem("recentlyPlayed")) || [];
+
   const recentlyPlayed =
     JSON.parse(localStorage.getItem("recentlyPlayed")) || [];
 
-  localStorage.setItem("selectedSong", JSON.stringify(recentlyPlayed[index]));
+  const selectedSong = recentlyPlayed[index];
+
+  const playlist = JSON.parse(localStorage.getItem("playlist")) || [];
+
+  const songIndex = playlist.findIndex(
+    (song) => song.title === selectedSong.title,
+  );
+
+  localStorage.setItem("curInd", songIndex);
+
+  localStorage.setItem("selectedSong", JSON.stringify(selectedSong));
 
   window.location.href = "dashboard/index.html";
 });
+
+audio.addEventListener('ended', () => {
+  let curInd = Number(localStorage.getItem(curInd)) || 0
+
+  const playlist = JSON.parse(localStorage.getItem('playlist')) || [];
+
+  if (curInd === playlist.length - 1) {
+    curInd = 0;
+  } else {
+    curInd++
+  }
+
+  localStorage.setItem('curInd', curInd)
+
+  loadHomePlay()
+})
+
+const persistvol = localStorage.getItem('vol')
+audio.volume = persistvol ? Number(persistvol) : 1
