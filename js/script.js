@@ -121,12 +121,12 @@ card.addEventListener("click", (e) => {
 
       setTimeout(() => {
         window.location.href = "dashboard/index.html";
-      }, 2000);
+      }, 50);
       break;
     }
   }
 
-  // window.location.href = "dashboard/index.html";
+  window.location.href = "dashboard/index.html";
 });
 
 for (let i = 0; i < navItem.length; i++) {
