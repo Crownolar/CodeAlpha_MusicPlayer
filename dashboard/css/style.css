@@ -10,7 +10,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgb(255, 255, 255);
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a0a12 40%, #0d1a1a 70%, #0a0a1a 100%);
+  min-height: 100vh;
 }
 
 .mainDiv {
@@ -18,9 +19,6 @@ body {
   max-width: 430px;
   height: 100vh;
   background: linear-gradient(180deg, #3d1b22 0%, #161214 60%, #0c090a 100%);
-  /* background: linear-gradient(180deg, #2b1f10 0%, #141210 50%, #0a0a0a 100%); */
-  /* background: linear-gradient(180deg, #182329 0%, #13141f 60%, #0a0b10 100%); */
-  /* background: linear-gradient(180deg, #242426 0%, #121214 40%, #000000 100%); */
 
   display: flex;
   flex-direction: column;
