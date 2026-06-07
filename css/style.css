@@ -10,7 +10,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgb(255, 255, 255);
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a0a12 40%, #0d1a1a 70%, #0a0a1a 100%);
+  min-height: 100vh;
 }
 
 .mainDiv {
@@ -19,7 +20,7 @@ body {
   width: 100%;
   max-width: 430px;
   height: 100vh;
-  background-color: black;
+   background: linear-gradient(160deg, #161616 0%, #1a0d14 45%, #0e1818 100%);
   display: flex;
   flex-direction: column;
   color: white;

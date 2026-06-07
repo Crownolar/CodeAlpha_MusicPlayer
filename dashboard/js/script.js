@@ -11,7 +11,15 @@ const timeDisplay = document.querySelector(".time");
 const forward = document.querySelector(".forward");
 const backward = document.querySelector(".backward");
 const audioStatus = document.querySelector(".audioStatus");
+const backBtn = document.querySelector(".backBtn");
 
+backBtn.addEventListener("click", () => {
+  if (document.referrer) {
+    history.back();
+  } else {
+    window.location.href = "../index.html";
+  }
+});
 const playlist = JSON.parse(localStorage.getItem("playlist")) || [];
 let curInd = Number(localStorage.getItem("curInd"));
 let isPlaying = false;

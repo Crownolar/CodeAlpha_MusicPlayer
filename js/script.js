@@ -13,6 +13,7 @@ const recentlyPlayedContainer = document.querySelector(".recentlyPlayedImgcon");
 const forward = document.querySelector(".forward");
 const backward = document.querySelector(".backward");
 
+
 cardData = [
   {
     label: "card 1",
