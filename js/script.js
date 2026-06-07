@@ -10,8 +10,8 @@ const nowPlayingImg = document.querySelector(".nowPlaying img");
 const nowPlayingTitle = document.querySelector(".playingInfo h4");
 const nowPlayingArtist = document.querySelector(".playingInfo p");
 const recentlyPlayedContainer = document.querySelector(".recentlyPlayedImgcon");
-const forward = document.querySelector('.forward')
-const backward = document.querySelector('.backward')
+const forward = document.querySelector(".forward");
+const backward = document.querySelector(".backward");
 
 cardData = [
   {
@@ -118,11 +118,15 @@ card.addEventListener("click", (e) => {
       localStorage.setItem("recentlyPlayed", JSON.stringify(recentlyPlayed));
 
       localStorage.setItem("selectedSong", JSON.stringify(cardData[i]));
+
+      setTimeout(() => {
+        window.location.href = "dashboard/index.html";
+      }, 2000);
       break;
     }
   }
 
-  window.location.href = "dashboard/index.html";
+  // window.location.href = "dashboard/index.html";
 });
 
 for (let i = 0; i < navItem.length; i++) {
@@ -149,9 +153,9 @@ let isPlaying = false;
 const audio = new Audio();
 
 const loadHomePlay = () => {
-  const playlist = JSON.parse(localStorage.getItem('playlist')) || [];
+  const playlist = JSON.parse(localStorage.getItem("playlist")) || [];
 
-  const curInd = Number(localStorage.getItem('curInd')) || 0;
+  const curInd = Number(localStorage.getItem("curInd")) || 0;
 
   const play = playlist[curInd];
 
@@ -162,15 +166,15 @@ const loadHomePlay = () => {
   nowPlayingTitle.textContent = play.title;
 
   audio.src = `./assets/audio/${play.audio}`;
-}
+};
 
-loadHomePlay()
+loadHomePlay();
 
 play.addEventListener("click", () => {
   // isplaying = !isplaying;
 
   if (!isPlaying) {
-    audio.play()
+    audio.play();
 
     icon.classList.remove("fa-play");
     icon.classList.add("fa-pause");
@@ -182,50 +186,49 @@ play.addEventListener("click", () => {
     icon.classList.add("fa-play");
     icon.classList.remove("fa-pause");
 
-    isPlaying = false
+    isPlaying = false;
   }
 });
 
-forward.addEventListener('click', () => {
-  let curInd = Number(localStorage.getItem('curInd')) || 0;
+forward.addEventListener("click", () => {
+  let curInd = Number(localStorage.getItem("curInd")) || 0;
 
   if (curInd === playlist.length - 1) {
     curInd = 0;
   } else {
-    curInd++
+    curInd++;
   }
 
-  localStorage.setItem('curInd', curInd)
+  localStorage.setItem("curInd", curInd);
 
-  loadHomePlay()
+  loadHomePlay();
 
-  audio.play()
+  audio.play();
 
-  isPlaying = true
+  isPlaying = true;
 
-  icon.classList.remove('fa-play')
-  icon.classList.add('fa-pause')
-})
+  icon.classList.remove("fa-play");
+  icon.classList.add("fa-pause");
+});
 
-backward.addEventListener('click', () => {
-  let curInd = Number(localStorage.getItem('curInd')) || 0
+backward.addEventListener("click", () => {
+  let curInd = Number(localStorage.getItem("curInd")) || 0;
 
   if (curInd === 0) {
-    curInd = playlist.length - 1
-  } else 
-    curInd--
+    curInd = playlist.length - 1;
+  } else curInd--;
 
-    localStorage.setItem('curInd', curInd)
+  localStorage.setItem("curInd", curInd);
 
-    loadHomePlay()
+  loadHomePlay();
 
-    audio.play()
+  audio.play();
 
-    isPlaying = true
+  isPlaying = true;
 
-    icon.classList.remove('fa-play')
-    icon.classList.add('fa-pause')
-})
+  icon.classList.remove("fa-play");
+  icon.classList.add("fa-pause");
+});
 
 const renderRecentlyPlayed = () => {
   const recentlyPlayed =
@@ -256,6 +259,8 @@ const renderRecentlyPlayed = () => {
     .join("");
 };
 
+console.log(JSON.parse(localStorage.getItem("recentlyPlayed")));
+
 renderRecentlyPlayed();
 
 recentlyPlayedContainer.addEventListener("click", (e) => {
@@ -285,21 +290,21 @@ recentlyPlayedContainer.addEventListener("click", (e) => {
   window.location.href = "dashboard/index.html";
 });
 
-audio.addEventListener('ended', () => {
-  let curInd = Number(localStorage.getItem(curInd)) || 0
+audio.addEventListener("ended", () => {
+  let curInd = Number(localStorage.getItem("curInd")) || 0;
 
-  const playlist = JSON.parse(localStorage.getItem('playlist')) || [];
+  const playlist = JSON.parse(localStorage.getItem("playlist")) || [];
 
   if (curInd === playlist.length - 1) {
     curInd = 0;
   } else {
-    curInd++
+    curInd++;
   }
 
-  localStorage.setItem('curInd', curInd)
+  localStorage.setItem("curInd", curInd);
 
-  loadHomePlay()
-})
+  loadHomePlay();
+});
 
-const persistvol = localStorage.getItem('vol')
-audio.volume = persistvol ? Number(persistvol) : 1
+const persistvol = localStorage.getItem("vol");
+audio.volume = persistvol ? Number(persistvol) : 1;

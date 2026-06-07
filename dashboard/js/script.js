@@ -10,13 +10,18 @@ const volumeSlider = document.querySelector(".volume input");
 const timeDisplay = document.querySelector(".time");
 const forward = document.querySelector(".forward");
 const backward = document.querySelector(".backward");
+const audioStatus = document.querySelector(".audioStatus");
 
 const playlist = JSON.parse(localStorage.getItem("playlist")) || [];
 let curInd = Number(localStorage.getItem("curInd"));
 let isPlaying = false;
 
 const song = playlist[curInd];
-console.log(song);
+if (!song) {
+  console.error("No song found");
+} else {
+  console.log(song.audio);
+}
 
 if (song) {
   playerTitleH4.textContent = song.title;
@@ -108,7 +113,7 @@ audio.addEventListener("error", () => {
 
 volumeSlider.addEventListener("input", () => {
   audio.volume = volumeSlider.value / 100;
-  localStorage.setItem('vol', audio.volume)
+  localStorage.setItem("vol", audio.volume);
 });
 
 audio.addEventListener("timeupdate", () => {
@@ -128,7 +133,7 @@ forward.addEventListener("click", () => {
   }
 
   localStorage.setItem("curInd", curInd);
-  loadSong(true);;
+  loadSong(true);
 
   console.log(playlist[curInd]);
 
@@ -136,7 +141,6 @@ forward.addEventListener("click", () => {
 });
 
 backward.addEventListener("click", () => {
-
   if (curInd === 0) {
     curInd = playlist.length - 1;
     console.log(curInd);
@@ -145,36 +149,36 @@ backward.addEventListener("click", () => {
   }
 
   localStorage.setItem("curInd", curInd);
-  loadSong(true);;
+  loadSong(true);
 
   console.log(playlist);
 });
 
-audio.addEventListener('ended', () => {
+audio.addEventListener("ended", () => {
   if (curInd === playlist.length - 1) {
     curInd = 0;
   } else {
-    curInd++
+    curInd++;
   }
 
-  localStorage.setItem('curInd', curInd)
-  loadSong(true)
-})
+  localStorage.setItem("curInd", curInd);
+  loadSong(true);
+});
 
-const onPlay = !audio.paused
-const curTime = audio.curTime
-const vol = audio.volume
+const onPlay = !audio.paused;
+const curTime = audio.curTime;
+const vol = audio.volume;
 
 const loadSong = (autoPlay = false) => {
   const songData = playlist[curInd];
-  
+
   playerTitleH4.textContent = songData.title;
   playerTitleP.textContent = songData.artist;
 
   playerTitleImg.src = `../assets/images/${songData.image}`;
   audio.src = `../assets/audio/${songData.audio}`;
 
-  progressBar.value = 0
+  progressBar.value = 0;
 
   audio.load();
 
@@ -191,15 +195,32 @@ const loadSong = (autoPlay = false) => {
 
     isPlaying = false;
   }
-  
-  const persistVol = localStorage.getItem('vol')
+
+  const persistVol = localStorage.getItem("vol");
 
   if (persistVol !== null) {
     audio.volume = Number(persistVol);
-    volumeSlider.value = Number(persistVol) * 100
+    volumeSlider.value = Number(persistVol) * 100;
   } else {
-    audio.volume = 1
+    audio.volume = 1;
   }
 };
+audio.addEventListener("loadstart", () => {
+  audioStatus.style.display = "flex";
+  audioStatus.textContent = "Loading audio...";
+});
+
+audio.addEventListener("canplaythrough", () => {
+  audioStatus.textContent = "Audio loaded successfully";
+
+  setTimeout(() => {
+    audioStatus.style.display = "none";
+  }, 2000);
+});
+
+audio.addEventListener("error", () => {
+  audioStatus.textContent = "Failed to load audio";
+});
 
 loadSong(true);
+

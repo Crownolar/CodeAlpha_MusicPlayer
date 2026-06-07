@@ -212,3 +212,24 @@ button:active {
   outline: none;
   cursor: pointer;
 }
+
+.audioStatus {
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+
+.loader {
+  width: 15px;
+  height: 15px;
+  border: 2px solid #ccc;
+  border-top-color: black;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
