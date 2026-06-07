@@ -15,8 +15,6 @@ body {
 }
 
 .mainDiv {
-  /* width: 55vw; */
-  /* width: min(100%, 430px); */
   width: 100%;
   max-width: 430px;
   height: 100vh;
@@ -28,12 +26,9 @@ body {
 }
 
 header div {
-  /* height: 10vh; */
   justify-content: space-between;
   display: flex;
   align-items: center;
-  /* gap: 15px; */
-  /* padding: 10px; */
 }
 
 .headerText {
@@ -64,43 +59,21 @@ main {
   gap: 20px;
   overflow-y: auto;
   scrollbar-width: none;
-  /* height: 70vh;
-  flex-direction: column;
-  display: flex;
-  gap: 20px; */
-  /* background-color: gold; */
 }
 
 .topPick {
   width: 100%;
-  /* height: 53vh; */
   min-height: 380px;
   display: flex;
   flex-direction: column;
-  /* background-color: lime; */
 }
 
 .topPickHeadline {
-  /* height: 8vh; */
   padding: 5px;
-  /* background-color: red; */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
-  /* margin-bottom: 8px; */
-  /* height: 10vh;
-  /* background-color: orange; */
 }
-
-.topPickHeadline p {
-  font-size: 10px;
-  color: gray;
-}
-
-/* .carousel {
-    height: 70vh;
-} */
 
 .imageCarousel {
   width: 100%;
@@ -140,41 +113,6 @@ main {
 .card:hover {
   transform: translateY(-4px);
 }
-
-/* .card1,
-.card2,
-.card3,
-.card4 {
-  border-radius: 10px;
-  height: 100%;
-  flex: 0 0 70%;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  min-width: 120px;
-  background-color: #1c1c1e;
-  scroll-snap-align: start;
-}
-
-.card1,
-.card2,
-.card3,
-.card4 {
-  transition: transform 0.3s ease;
-}
-
-.card1:hover,
-.card2:hover,
-.card3:hover,
-.card4:hover {
-  transform: translateY(-4px);
-} */
-
-/* .card1, .card2, .card3, .card4 {
-  background-color: rgb(255, 255, 255);
-  display: flex;
-  flex-direction: column;
-} */
 
 .cardImg {
   width: 100%;
