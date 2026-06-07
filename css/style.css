@@ -41,11 +41,6 @@ header div {
   flex-direction: column;
 }
 
-.headerText p {
-  color: #8e8e93;
-  font-size: 0.8rem;
-}
-
 .headerText h2 {
   font-size: 1.8rem;
   font-weight: 700;
