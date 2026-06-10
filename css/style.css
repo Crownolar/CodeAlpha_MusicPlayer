@@ -1,3 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Mono:wght@300;400;500&display=swap");
+
+/* ARCHKODE Brand Tokens (My Brand) */
+:root {
+  --ak-arch: #f0ece4;
+  --ak-kode: #c9a96e;
+  --ak-bg: #0a0a0a;
+  --ak-muted: #7a7570;
+  --noor-red: #e11b3f;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +21,13 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #0f0f0f 0%, #1a0a12 40%, #0d1a1a 70%, #0a0a1a 100%);
+  background: linear-gradient(
+    135deg,
+    #0f0f0f 0%,
+    #1a0a12 40%,
+    #0d1a1a 70%,
+    #0a0a1a 100%
+  );
   min-height: 100vh;
 }
 
@@ -18,14 +35,14 @@ body {
   width: 100%;
   max-width: 430px;
   height: 100vh;
-   background: linear-gradient(160deg, #161616 0%, #1a0d14 45%, #0e1818 100%);
+  background: linear-gradient(160deg, #161616 0%, #1a0d14 45%, #0e1818 100%);
   display: flex;
   flex-direction: column;
   color: white;
   padding: 10px;
 }
 
-header div {
+header > div {
   justify-content: space-between;
   display: flex;
   align-items: center;
@@ -34,6 +51,38 @@ header div {
 .headerText {
   display: flex;
   flex-direction: column;
+}
+
+.archkodeWordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 0;
+  line-height: 1;
+}
+
+.brandArch {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--ak-arch);
+  letter-spacing: 0.04em;
+}
+
+.brandKode {
+  font-family: "DM Mono", monospace;
+  font-weight: 300;
+  font-size: 1.8rem;
+  color: var(--ak-kode);
+  letter-spacing: 0.1em;
+}
+
+.noorLabel {
+  font-family: "DM Mono", monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: var(--ak-muted);
+  text-transform: uppercase;
+  padding-left: 2px;
 }
 
 .headerText h2 {
@@ -77,14 +126,12 @@ main {
 
 .imageCarousel {
   width: 100%;
-  /* height: 60vh; */
   flex: 1;
   display: flex;
   flex-direction: row;
   overflow-x: auto;
   gap: 15px;
   scrollbar-width: none;
-  /* background-color: green; */
   -webkit-overflow-scrolling: touch;
   border-radius: 10px;
   scroll-snap-type: x mandatory;
@@ -129,9 +176,7 @@ main {
 }
 
 .cardDetails {
-  /* background-color: #e11b3f; */
   background: #1c1c1e;
-  /* background: transparent; */
   height: 25%;
   display: flex;
   flex-direction: column;
@@ -168,8 +213,7 @@ main {
 .recentlyPlayed {
   background-color: #1c1c1e;
   width: 100%;
-  /* height: 30%; */
-   min-height: 180px;
+  min-height: 180px;
   border-radius: 10px;
   padding: 15px;
   display: flex;
@@ -202,7 +246,6 @@ main {
 }
 
 .imgWrap {
-  /* min-width: 100px; */
   flex: 0 0 100px;
   display: flex;
   flex-direction: column;
@@ -261,19 +304,22 @@ main {
   gap: 15px;
 }
 
-.backward, .forward, .play {
+.backward,
+.forward,
+.play {
   cursor: pointer;
   transition: transform 0.4s ease;
 }
 
-.backward:hover, .forward:hover, .play:hover {
+.backward:hover,
+.forward:hover,
+.play:hover {
   transform: scale(1.2);
 }
 
 .moreSection {
   background-color: #1c1c1e;
   width: 100%;
-  /* height: 20%; */
   min-height: 70px;
   display: flex;
   align-items: center;
@@ -281,7 +327,6 @@ main {
   padding-inline: 8px;
   padding-block: 8px;
   border-radius: 8px;
-  /* flex-direction: column; */
 }
 
 nav,
@@ -327,4 +372,22 @@ nav {
   color: #e11b3f;
 }
 
+.archkodeStamp {
+  font-size: 0.45rem;
+  letter-spacing: 0.25em;
+  color: var(--ak-muted);
+  text-transform: uppercase;
+  text-align: center;
+  padding: 4px 0 2px;
+  user-select: none;
+}
 
+.archkodeStamp .stampArch {
+  color: var(--ak-arch);
+  font-weight: 500;
+}
+
+.archkodeStamp .stampKode {
+  color: var(--ak-kode);
+  font-weight: 300;
+}

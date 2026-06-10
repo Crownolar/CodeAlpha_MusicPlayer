@@ -1,3 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Mono:wght@300;400;500&display=swap");
+
+/* ARCHKODE Brand Tokens (My Brand) */
+:root {
+  --ak-arch: #f0ece4;
+  --ak-kode: #c9a96e;
+  --ak-bg: #0a0a0a;
+  --ak-muted: #7a7570;
+  --noor-red: #e11b3f;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +21,13 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #0f0f0f 0%, #1a0a12 40%, #0d1a1a 70%, #0a0a1a 100%);
+  background: linear-gradient(
+    135deg,
+    #0f0f0f 0%,
+    #1a0a12 40%,
+    #0d1a1a 70%,
+    #0a0a1a 100%
+  );
   min-height: 100vh;
 }
 
@@ -36,6 +53,7 @@ body {
   align-items: center;
   padding: 4px 0;
   flex-shrink: 0;
+  gap: 10px;
 }
 
 .backBtn {
@@ -50,7 +68,9 @@ body {
   justify-content: center;
   cursor: pointer;
   font-size: 14px;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .backBtn:hover {
@@ -61,6 +81,25 @@ body {
 
 .backBtn:active {
   transform: scale(0.92);
+}
+
+.archkodeStamp {
+  font-family: "DM Mono", monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.25em;
+  color: var(--ak-muted);
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.archkodeStamp .stampArch {
+  color: var(--ak-arch);
+  font-weight: 500;
+}
+
+.archkodeStamp .stampKode {
+  color: var(--ak-kode);
+  font-weight: 300;
 }
 
 .content {
