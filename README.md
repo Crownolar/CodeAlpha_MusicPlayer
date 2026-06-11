@@ -1,18 +1,93 @@
 # Noor — Quran Audio Player
 
-A mobile-first web music player built with vanilla HTML, CSS, and JavaScript. Designed around a dark editorial aesthetic with a red accent, Noor lets you browse, play, and track Quran recitations by Maher Al-Mu'aiqly across two screens: a home/browse screen and a full player dashboard.
+> An ARCHKODE Project · Foundation first.
+
+A mobile-first Quran audio player built with vanilla HTML, CSS, and JavaScript. No frameworks. No shortcuts. Just clean, intentional front-end craft.
+
+Noor (نور) means *light* in Arabic — the name chosen deliberately. Built as part of the **CodeAlpha Frontend Development Internship**.
 
 ---
 
-## Project Structure
+## Live Demo
+
+[archkode-noor.vercel.app](https://archkode-noor.vercel.app)
+
+---
+
+## Screenshots
+
+| Home Screen | Full Player |
+|-------------|-------------|
+| ![Home](./screenshots/home.png) | ![Dashboard](./screenshots/dashboard.png) |
+
+---
+
+## Features
+
+### Home Screen
+- **Top Picks carousel** — horizontally scrollable cards with album art, title, artist, and year
+- **Recently Played** — scrollable row that persists across sessions via `localStorage`; updates automatically when a song is played
+- **Now Playing bar** — mini-bar showing current song art, title, artist, and playback controls
+- **Mini progress bar** — 2px red fill bar inside the Now Playing section tracking real-time playback position
+- **Bottom navigation** — Listen, Library, Search, Profile tabs with active state
+- **ARCHKODE wordmark** — branded header with Playfair Display + DM Mono typeface pairing
+
+### Full Player (Dashboard)
+- **Album art display** — full-width square art container
+- **Song metadata** — title and artist rendered below the art
+- **Seekable progress bar** — range input that reads and updates `currentTime` in real time
+- **Time display** — elapsed time and remaining time (e.g. `1:23 / -2:44`)
+- **Playback controls** — previous, play/pause, next
+- **Volume control** — slider that adjusts `audio.volume` and persists to `localStorage`
+- **Audio status indicator** — loading message shown during network fetch, auto-hides on ready
+- **Back button** — returns to home via `history.back()`, falls back to `../index.html`
+
+### Playback State
+State is managed through `localStorage` as a single source of truth — surviving page navigation between the home screen and dashboard without losing position or context.
+
+| Key | Purpose |
+|-----|---------|
+| `playlist` | Full array of song objects |
+| `curInd` | Index of the currently selected song |
+| `selectedSong` | The currently selected song object |
+| `recentlyPlayed` | Up to 6 recently played songs |
+| `resumeTime` | Playback position to restore on dashboard load |
+| `wasPlaying` | Whether audio was playing when navigation occurred |
+| `vol` | Last set volume level |
+
+**Navigation behaviour:**
+- Tapping a **card** → navigates to dashboard, starts from `0:00`, autoplays
+- Tapping a **recently played** item → navigates to dashboard, starts from `0:00`, autoplays
+- Tapping the **Now Playing bar** → navigates to dashboard, resumes from exact position, respects paused/playing state
+- Using **forward/backward** on home → changes song in place, autoplays
+
+---
+
+## Known Limitations
+
+These are noted honestly — an architect documents what isn't finished, not just what works.
+
+| Feature | Status |
+|---------|--------|
+| Shuffle | UI only — does not randomise playback order yet |
+| Repeat | UI only — does not loop current song or playlist yet |
+| Like / heart | Visual toggle only — not persisted to `localStorage` yet |
+| Library, Search, Profile tabs | UI only — screens not yet built |
+| "See All" links | UI only — no expanded view yet |
+| Home ↔ Dashboard audio sync | State syncs on navigation, not in real time |
+| Autoplay policy | Mobile Safari may block autoplay without a prior user gesture — tap play once manually if needed |
+
+---
+
+## Folder Structure
 
 ```
 CODEALPHA_MUSICPLAYER/
-├── index.html                  # Home screen (browse + now playing bar)
+├── index.html                  # Home screen
 ├── README.md
 ├── css/
 │   ├── style.css               # Home screen styles
-│   └── mobileStyle.css         # Additional mobile styles
+│   └── mobileStyle.css         # Mobile-specific styles
 ├── js/
 │   └── script.js               # Home screen logic
 ├── assets/
@@ -31,92 +106,50 @@ CODEALPHA_MUSICPLAYER/
 
 ---
 
-## Features
-
-### Home Screen
-- **Top Picks carousel** — horizontally scrollable cards with album art, title, artist, and year
-- **Recently Played** — horizontally scrollable row that persists across sessions via `localStorage`; updates automatically when a song is played
-- **Now Playing bar** — mini-bar at the bottom showing current song art, title, artist, and playback controls (previous, play/pause, next)
-- **Mini progress bar** — a 2px red fill bar inside the Now Playing section that tracks real-time playback position
-- **Bottom navigation** — Listen, Library, Search, Profile tabs (active state on Listen; other tabs are UI only)
-- **ARCHKODE wordmark** — branded header with Playfair Display + DM Mono typeface pairing
-
-### Dashboard (Full Player)
-- **Album art display** — full-width square art container
-- **Song metadata** — title and artist displayed below the art
-- **Progress bar** — seekable range input that tracks and updates `currentTime` in real time
-- **Time display** — shows elapsed time and remaining time (e.g. `1:23 / -2:44`)
-- **Playback controls** — previous, play/pause, next
-- **Volume slider** — adjusts `audio.volume`; persists value to `localStorage` across sessions
-- **Audio status indicator** — "Loading audio…" message shown during network fetch, auto-hides on load
-- **Back button** — returns to home screen via `history.back()` or falls back to `../index.html`
-
-### Playback State (Single Source of Truth)
-Playback state is managed entirely through `localStorage` so it survives page navigation:
-
-| Key | Purpose |
-|---|---|
-| `playlist` | Full array of song objects |
-| `curInd` | Index of the currently selected song |
-| `selectedSong` | The currently selected song object |
-| `recentlyPlayed` | Array of up to 6 recently played songs |
-| `resumeTime` | Playback position to restore on dashboard load |
-| `wasPlaying` | Whether audio was playing when navigation occurred |
-| `vol` | Last set volume level |
-
-**Navigation behaviour:**
-- Tapping a **card** → navigates to dashboard, starts song from `0:00`, autoplays
-- Tapping a **recently played** item → navigates to dashboard, starts from `0:00`, autoplays
-- Tapping the **Now Playing bar** → navigates to dashboard, resumes from exact position, respects paused/playing state
-- Using **forward/backward** on home → changes song in place, autoplays
-
----
-
-## Known Limitations / Not Yet Working
-
-| Feature | Status |
-|---|---|
-| Shuffle button | UI only — does not randomise playback order |
-| Repeat button | UI only — does not loop current song or playlist |
-| Like / heart button | Visual toggle only — not saved to `localStorage` |
-| Library, Search, Profile nav tabs | UI only — no screens built for these yet |
-| "See All" links | UI only — no expanded view |
-| Home screen audio | The home `audio` object plays independently of the dashboard — state is synced only on navigation, not in real time |
-| Autoplay policy | Some browsers (especially mobile Safari) block `audio.play()` on page load without a prior user gesture. If autoplay silently fails, the user must tap play once manually |
-
----
-
 ## Tech Stack
 
 | Layer | Technology |
-|---|---|
+|-------|-----------|
 | Markup | HTML5 |
-| Styling | CSS3 (custom properties, flexbox, CSS animations) |
+| Styling | CSS3 — Flexbox, Custom Properties, Keyframe Animations |
 | Logic | Vanilla JavaScript (ES6+) |
 | Icons | Font Awesome 6.5.1 |
-| Fonts | Playfair Display, DM Mono (Google Fonts) |
+| Fonts | Playfair Display · DM Mono (Google Fonts) |
 | State | `localStorage` |
-| Audio | Web Audio API (`new Audio()`) |
+| Audio | Web Audio API — `new Audio()` |
 
-No frameworks. No build tools. No dependencies beyond the CDN icon and font imports.
+No frameworks. No build tools. No dependencies beyond CDN icon and font imports.
 
 ---
 
-## Setup
+## Design System
 
-1. Clone or download the project
-2. Place `.mp3` audio files in `assets/audio/` and `.png` cover art in `assets/images/`
-3. File names must match the `audio` and `image` fields in `cardData` inside `js/script.js`
-4. Open `index.html` in a browser — no server required for local use
+Noor runs on the **ARCHKODE** brand token system — a consistent set of CSS variables shared across all ARCHKODE projects:
 
-> For production deployment, serve over HTTPS. Some browsers block autoplay and `localStorage` access on plain `file://` URLs.
+```css
+:root {
+  --ak-arch:  #f0ece4;  /* primary text — cream     */
+  --ak-kode:  #c9a96e;  /* accent — gold            */
+  --ak-bg:    #0a0a0a;  /* background — deep black  */
+  --ak-muted: #7a7570;  /* secondary text — warm grey */
+  --noor-red: #e11b3f;  /* Noor's signature accent  */
+}
+```
+
+Noor's own identity lives in `--noor-red` — a deliberate separation. The ARCHKODE brand is the foundation; Noor is the project built on top of it.
+
+**Palette:** Near-black layered backgrounds (`#0e0c0d` → `#161214` → `#1e181b`) create depth through layering rather than flat cards. The red accent is used sparingly — active states, the now-playing indicator, the progress thumb — so it carries weight every time it appears.
+
+**Typography:** Playfair Display for display text and song titles (the craft). DM Mono for UI labels, timestamps, and navigation (the code).
 
 ---
 
 ## Audio Files Expected
 
-| Title | Audio file | Image file |
-|---|---|---|
+Place these in `assets/audio/` and `assets/images/` respectively:
+
+| Surah | Audio | Cover Art |
+|-------|-------|-----------|
 | Al-Fatiha | `Al-Fatiha.mp3` | `Al-Fatiha.png` |
 | An-Nas | `An-Nas.mp3` | `An-Nas.png` |
 | Al-Falaq | `Al-Falaq.mp3` | `Al-Falaq.png` |
@@ -124,14 +157,45 @@ No frameworks. No build tools. No dependencies beyond the CDN icon and font impo
 | Al-Masad | `Al-Masad.mp3` | `Al-Masad.png` |
 | An-Nasr | `An-Nasr.mp3` | `An-Nasr.png` |
 
----
-
-## Design
-
-- **Palette:** Near-black layered backgrounds (`#0e0c0d` → `#161214` → `#1e181b`), single red accent `#e11b3f`, muted text `#9b8f93`
-- **Theme:** Dark editorial — intentional depth through background layering rather than flat cards
-- **Brand:** ARCHKODE wordmark in the header (Playfair Display + DM Mono), Noor as the product name
+Reciter: **Maher Al-Mu'aiqly**
 
 ---
 
-*Built by Abu-Khodijah · ARCHKODE Project*
+## Getting Started
+
+No installation or build step required.
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/codealpha-musicplayer.git
+
+# Open in browser
+open index.html
+```
+
+Or open `index.html` directly in any modern browser.
+
+> For deployment, serve over HTTPS. Some browsers restrict autoplay and `localStorage` on plain `file://` URLs.
+
+---
+
+## Keyboard & Interaction
+
+| Action | Behaviour |
+|--------|-----------|
+| Tap card | Opens dashboard, plays from start |
+| Tap Now Playing bar | Opens dashboard, resumes exact position |
+| Swipe (dashboard) | Not yet implemented |
+| Volume slider | Persists across sessions |
+
+---
+
+## Author
+
+**Oriade Yusuf** · [ARCHKODE](https://archkode.dev)
+
+Frontend Engineer · CodeAlpha Intern · Building with intention, not shortcuts.
+
+---
+
+*An ARCHKODE Project · Foundation first.*
