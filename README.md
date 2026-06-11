@@ -18,7 +18,7 @@ Noor (نور) means *light* in Arabic — the name chosen deliberately. Built as
 
 | Home Screen | Full Player |
 |-------------|-------------|
-| ![Home](./screenshots/home.png) | ![Dashboard](./screenshots/dashboard.png) |
+| ![Home](./screenshots/HomePage.png) | ![Dashboard](./screenshots/DashboardPage.png) |
 
 ---
 
