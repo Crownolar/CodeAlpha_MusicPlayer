@@ -33,7 +33,7 @@ cardData = [
   },
   {
     label: "card 3",
-    title: `Al-Flaq`,
+    title: `Al-Falaq`,
     image: "Al-Falaq.png",
     artist: " Maher Al-Mu'aiqly",
     audio: `Al-Falaq.mp3`,

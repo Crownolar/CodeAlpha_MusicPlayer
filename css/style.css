@@ -152,6 +152,7 @@ main {
   min-width: 120px;
   background-color: #1c1c1e;
   scroll-snap-align: start;
+  cursor: pointer;
 }
 
 .card {
