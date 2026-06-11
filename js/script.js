@@ -262,10 +262,10 @@ const renderRecentlyPlayed = () => {
   const recentlyPlayed =
     JSON.parse(localStorage.getItem("recentlyPlayed")) || [];
 
-  if (recentlyPlayed.length === 0) {
-    recentlyPlayedContainer.innerHTML = "<p>No recently played songs yet</p>";
-    return;
-  }
+  if (!recentlyPlayed.length) {
+  recentlyPlayedContainer.innerHTML = `<p style="color:#5e5458;font-size:12px;padding:8px 0">No recently played songs yet</p>`;
+  return;
+}
 
   recentlyPlayedContainer.innerHTML = recentlyPlayed
     .map(
@@ -289,7 +289,7 @@ const renderRecentlyPlayed = () => {
 
 console.log(JSON.parse(localStorage.getItem("recentlyPlayed")));
 
-renderRecentlyPlayed();
+setTimeout(renderRecentlyPlayed, 0);
 
 recentlyPlayedContainer.addEventListener("click", (e) => {
   const clicked = e.target.closest(".imgWrap");
