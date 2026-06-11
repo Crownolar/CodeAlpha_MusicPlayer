@@ -12,7 +12,7 @@ const nowPlayingArtist = document.querySelector(".playingInfo p");
 const recentlyPlayedContainer = document.querySelector(".recentlyPlayedImgcon");
 const forward = document.querySelector(".forward");
 const backward = document.querySelector(".backward");
-
+const progressMiniFill = document.querySelector(".progressMiniFill");
 
 cardData = [
   {
@@ -93,6 +93,8 @@ const curInd = Number(localStorage.getItem("curInd")) || 0;
 
 const curSong = playlist[curInd];
 
+progressMiniFill.style.width = "0%";
+
 // const selectedSong = JSON.parse(localStorage.getItem("selectedSong"));
 
 if (curSong) {
@@ -136,6 +138,9 @@ card.addEventListener("click", (e) => {
 
       localStorage.setItem("selectedSong", JSON.stringify(cardData[i]));
 
+      localStorage.setItem("resumeTime", 0);
+      localStorage.setItem("wasPlaying", true);
+
       setTimeout(() => {
         window.location.href = "dashboard/index.html";
       }, 50);
@@ -162,6 +167,8 @@ for (let i = 0; i < navItem.length; i++) {
 }
 
 playingInfo.addEventListener("click", () => {
+  localStorage.setItem("resumeTime", audio.currentTime);
+  localStorage.setItem("wasPlaying", isPlaying);
   window.location.href = "dashboard/index.html";
 });
 
@@ -208,6 +215,8 @@ play.addEventListener("click", () => {
 });
 
 forward.addEventListener("click", () => {
+  localStorage.setItem("resumeTime", 0);
+  localStorage.setItem("wasPlaying", true);
   let curInd = Number(localStorage.getItem("curInd")) || 0;
 
   if (curInd === playlist.length - 1) {
@@ -229,6 +238,8 @@ forward.addEventListener("click", () => {
 });
 
 backward.addEventListener("click", () => {
+  localStorage.setItem("resumeTime", 0);
+  localStorage.setItem("wasPlaying", true);
   let curInd = Number(localStorage.getItem("curInd")) || 0;
 
   if (curInd === 0) {
@@ -300,8 +311,9 @@ recentlyPlayedContainer.addEventListener("click", (e) => {
     (song) => song.title === selectedSong.title,
   );
 
+  localStorage.setItem("resumeTime", 0);
+  localStorage.setItem("wasPlaying", true);
   localStorage.setItem("curInd", songIndex);
-
   localStorage.setItem("selectedSong", JSON.stringify(selectedSong));
 
   window.location.href = "dashboard/index.html";
@@ -325,3 +337,10 @@ audio.addEventListener("ended", () => {
 
 const persistvol = localStorage.getItem("vol");
 audio.volume = persistvol ? Number(persistvol) : 1;
+
+audio.addEventListener("timeupdate", () => {
+  if (!audio.duration) return;
+  const track = (audio.currentTime / audio.duration) * 100;
+  // progressMiniFill.style.width = track + '%';
+  progressMiniFill.style.width = `${track}%`;
+});

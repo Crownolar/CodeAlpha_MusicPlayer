@@ -190,7 +190,19 @@ const loadSong = (autoPlay = false) => {
 
   audio.load();
 
-  if (autoPlay || onPlay) {
+  const resumeTime = parseFloat(localStorage.getItem("resumeTime")) || 0;
+  const wasPlaying = localStorage.getItem("wasPlaying") === "true";
+
+  audio.addEventListener("loadedmetadata", () => {
+    if (resumeTime > 0) {
+      audio.currentTime = resumeTime;
+    }
+    
+    localStorage.removeItem("resumeTime");
+    localStorage.removeItem("wasPlaying");
+  }, { once: true });
+
+  if (autoPlay || wasPlaying) {
     audio.play();
 
     icon.classList.remove("fa-play");
@@ -230,5 +242,5 @@ audio.addEventListener("error", () => {
   audioStatus.textContent = "Failed to load audio";
 });
 
-loadSong(true);
+loadSong(false);
 
